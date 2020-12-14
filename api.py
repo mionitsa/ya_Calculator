@@ -30,7 +30,6 @@ def main():
             "end_session": False
         }
     }
-    a = 0
     handle_dialog(request.json, response)
 
     logging.info('Response: %r', response)
@@ -104,17 +103,13 @@ def handle_dialog(req, res):
     if req['session']['new']:
         # Это новый пользователь.
         # Инициализируем сессию и поприветствуем его.
-        a = 1
         res['response'][
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
-                      ' достижения желаемого среднего балла.'
+                      ' достижения желаемого среднего балла. Сначала введи средний'\
+                      ' балл, который хочешь получить, а потом свои оценки.'\
+                      ' Вот так - 4.6 4 3 4 5 4 3'
         return
-    
-    if a == 1:
-        res['response'][
-            'text'] = 'Сначала введи средний балл, который хочешь' \
-                      ' получить, а потом свои оценки. Вот так - 4.6 4 3 4 5 4 3'
-        return
+   
 
     user_input = req['request']['original_utterance'].split()
 
