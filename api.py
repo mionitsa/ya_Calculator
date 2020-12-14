@@ -107,10 +107,13 @@ def handle_dialog(req, res):
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
                       ' достижения желаемого среднего балла. Сначала введи средний'\
                       ' балл, который хочешь получить, а потом свои оценки.'\
-                      ' Вот так - 4.6 4 3 4 5 4 3'
+                      ' Вот так - 4.6 434543'
         return
    
-
     user_input = req['request']['original_utterance'].split()
+    b = []
+    for i in user_input[1]:
+        b.append(i)
+        
 
-    res['response']['text'] = sredball(' '.join(user_input[1:]), user_input[0])
+    res['response']['text'] = sredball(' '.join(b), user_input[0])
