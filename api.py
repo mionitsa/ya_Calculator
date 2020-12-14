@@ -108,7 +108,16 @@ def handle_dialog(req, res):
                       ' достижения желаемого среднего балла. Сначала скажи средний'\
                       ' балл, который хочешь получить, а потом свои текущие оценки.'\
                       ' Вот так: 4.6 434543'
-        return  
+        return
+    if req['request']['original_utterance'].lower() in [
+        'ладно',
+        'куплю',
+        'покупаю',
+        'хорошо',
+    ]:
+        # Пользователь согласился, прощаемся.
+        res['response']['text'] = 'Слона можно найти на Яндекс.Маркете!'
+        return
     
     user_input = req['request']['original_utterance'].split()
     
