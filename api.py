@@ -16,7 +16,6 @@ logging.basicConfig(level=logging.DEBUG)
 # Хранилище данных о сессиях.
 sessionStorage = {}
 
-a = 0
 
 # Задаем параметры приложения Flask.
 @app.route("/", methods=['POST'])
@@ -31,7 +30,7 @@ def main():
             "end_session": False
         }
     }
-
+    a = 0
     handle_dialog(request.json, response)
 
     logging.info('Response: %r', response)
