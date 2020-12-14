@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 # Хранилище данных о сессиях.
 sessionStorage = {}
 
+a = 0
 
 # Задаем параметры приложения Flask.
 @app.route("/", methods=['POST'])
@@ -100,8 +101,7 @@ def sredball(marksstr, ballstr):
 # Функция для непосредственной обработки диалога.
 def handle_dialog(req, res):
     user_id = req['session']['user_id']
-    a = 0
-
+ 
     if req['session']['new']:
         # Это новый пользователь.
         # Инициализируем сессию и поприветствуем его.
