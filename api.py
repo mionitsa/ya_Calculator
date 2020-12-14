@@ -122,7 +122,7 @@ def handle_dialog(req, res):
                                     
         return
     
-    user_input = req['request']['original_utterance'].split()
+    user_input = req['request']['original_utterance'].replace(',','.').split()
     
     b = []
     for i in user_input[1]:
