@@ -107,10 +107,12 @@ def handle_dialog(req, res):
 
         sessionStorage[user_id] = {
             'suggests': [
-                "Гитхаб",
-                "Сайт",
+                "Не хочу.",
+                "Не буду.",
+                "Отстань!",
             ]
         }
+
         res['response'][
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
                       ' достижения желаемого среднего балла. Сначала скажи средний' \
@@ -164,25 +166,26 @@ def handle_dialog(req, res):
 
     res['response']['buttons'] = get_suggests(user_id)
 
-    def get_suggests(user_id):
-        session = sessionStorage[user_id]
+def get_suggests(user_id):
+    session = sessionStorage[user_id]
 
-        # Выбираем две первые подсказки из массива.
-        suggests = [
-            {'title': suggest, 'hide': True}
-            for suggest in session['suggests'][1]
-        ]
+    # Выбираем две первые подсказки из массива.
+    suggests = [
+        {'title': suggest, 'hide': True}
+        for suggest in session['suggests'][:2]
+    ]
 
-        # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
-        session['suggests'] = session['suggests'][0]
-        sessionStorage[user_id] = session
+    # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
+    session['suggests'] = session['suggests'][1:]
+    sessionStorage[user_id] = session
 
+    # Если осталась только одна подсказка, предлагаем подсказку
+    # со ссылкой на Яндекс.Маркет.
+    if len(suggests) < 2:
+        suggests.append({
+            "title": "Ладно",
+            "url": "https://market.yandex.ru/search?text=слон",
+            "hide": True
+        })
 
-        if len(suggests) < 2:
-            suggests.append({
-                "title": "Сайт",
-                "url": "https://www.pythonanywhere.com/user/mionitsa/webapps/#tab_id_mionitsa_pythonanywhere_com",
-                "hide": True
-            })
-
-        return suggests
+    return suggests
