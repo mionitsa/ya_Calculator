@@ -147,4 +147,4 @@ def handle_dialog(req, res):
 
     res['response']['text'] = sredball(marks, sred)
 
-#бб
+#asfa
