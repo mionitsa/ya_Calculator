@@ -124,7 +124,7 @@ def handle_dialog(req, res):
         return
 
     sred = req['request']['original_utterance'].split()[0].replace(',', '.')[:-1]
-    marks = [i for i in req['request']['original_utterance'].split()[1]]
+    marks = [i for i in req['request']['original_utterance'].split()[1:]]
     b = []
     for i in marks:
         if 0 < int(i) <= 5:
