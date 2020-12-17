@@ -146,3 +146,27 @@ def handle_dialog(req, res):
     marks = ' '.join(marks2)
 
     res['response']['text'] = sredball(marks, sred)
+
+    def get_suggests(user_id):
+        session = sessionStorage[user_id]
+
+        # Выбираем две первые подсказки из массива.
+        suggests = [
+            {'title': suggest, 'hide': True}
+            for suggest in session['suggests'][:2]
+        ]
+
+        # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
+        session['suggests'] = session['suggests'][1:]
+        sessionStorage[user_id] = session
+
+        # Если осталась только одна подсказка, предлагаем подсказку
+        # со ссылкой на Яндекс.Маркет.
+        if len(suggests) < 2:
+            suggests.append({
+                "title": "Ладно",
+                "url": "https://market.yandex.ru/search?text=слон",
+                "hide": True
+            })
+
+        return suggests
