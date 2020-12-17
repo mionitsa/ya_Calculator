@@ -170,6 +170,10 @@ def get_suggests(user_id):
     session = sessionStorage[user_id]
 
     # Выбираем две первые подсказки из массива.
+    suggests = [
+        {'title': suggest, 'hide': False}
+        for suggest in session['suggests']
+    ]
 
     # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
     session['suggests'] = session['suggests'][1:]
