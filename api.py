@@ -148,3 +148,4 @@ def handle_dialog(req, res):
     res['response']['text'] = sredball(marks, sred)
 
 #emil12
+#misha
