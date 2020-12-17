@@ -132,4 +132,4 @@ def handle_dialog(req, res):
 
     res['response']['text'] = sredball(' '.join(b), sred)
 
-#я что-то изменил
+# я что-то изменил
