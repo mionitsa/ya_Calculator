@@ -127,6 +127,14 @@ def handle_dialog(req, res):
         res['response']['text'] = '5'
         return
 
+    if req['request']['original_utterance'].lower() == 'привет':
+        res['response']['text'] = 'Привет, друг!'
+        return
+
+    if req['request']['original_utterance'].lower() == 'пока':
+        res['response']['text'] = 'Миша пока('
+        return
+
     sred = req['request']['original_utterance'].split()[0].replace(',', '.')
     sred2 = []
     for i in sred:
