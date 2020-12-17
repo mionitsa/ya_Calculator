@@ -123,7 +123,7 @@ def handle_dialog(req, res):
 
         return
 
-    sred = req['request']['original_utterance'].split()[0].replace('.', ',')[:-1]
+    sred = req['request']['original_utterance'].split()[0].replace(',', '.')[:-1]
     marks = [i[0] for i in req['request']['original_utterance'].split()[1:]]
     b = []
     for i in marks:
