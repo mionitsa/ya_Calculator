@@ -107,9 +107,9 @@ def handle_dialog(req, res):
 
         sessionStorage[user_id] = {
             'suggests': [
-                "Сайт",
+                "Привет",
                 "Помощь",
-                "Отстань!",
+                "Сайт",
             ]
         }
 
@@ -183,8 +183,8 @@ def get_suggests(user_id):
     # со ссылкой на Яндекс.Маркет.
     if len(suggests) < 2:
         suggests.append({
-            "title": "Ладно",
-            "url": "https://market.yandex.ru/search?text=слон",
+            "title": "Сайт",
+            "url": "mionitsa.pythonanywhere.com",
             "hide": True
         })
 
