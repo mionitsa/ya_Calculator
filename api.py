@@ -104,12 +104,22 @@ def handle_dialog(req, res):
     if req['session']['new']:
         # Это новый пользователь.
         # Инициализируем сессию и поприветствуем его.
+
+        sessionStorage[user_id] = {
+            'suggests': [
+                "Гитхаб",
+                "Сайт",
+            ]
+        }
         res['response'][
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
                       ' достижения желаемого среднего балла. Сначала скажи средний' \
                       ' балл, который хочешь получить, а потом свои текущие оценки.' \
                       ' Вот так: 4.6  4 5 4 5'
+
+        res['response']['buttons'] = get_suggests(user_id)
         return
+
     if req['request']['original_utterance'].lower() in [
         'помощь',
         'что ты умеешь',
@@ -123,23 +133,6 @@ def handle_dialog(req, res):
 
         return
 
-    if req['session']['new']:
-        # Это новый пользователь.
-        # Инициализируем сессию и поприветствуем его.
-
-        sessionStorage[user_id] = {
-            'suggests': [
-                "Помощь",
-                "Что ты умеешь?",
-            ]
-        }
-
-        res['response']['text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
-                                  ' достижения желаемого среднего балла. Сначала скажи средний' \
-                                  ' балл, который хочешь получить, а потом свои текущие оценки.' \
-                                  ' Вот так: 4.6  4 4 5 4'
-        res['response']['buttons'] = get_suggests(user_id)
-        return
 
     if req['request']['original_utterance'].lower() == 'какая оценка за проект?':
         res['response']['text'] = '5'
@@ -175,18 +168,17 @@ def handle_dialog(req, res):
         # Выбираем две первые подсказки из массива.
         suggests = [
             {'title': suggest, 'hide': True}
-            for suggest in session['suggests'][:2]
+            for suggest in session['suggests'][1]
         ]
-#изменил что-то
+
         # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
-        session['suggests'] = session['suggests'][1:]
+        session['suggests'] = session['suggests'][0]
         sessionStorage[user_id] = session
 
-        # Если осталась только одна подсказка, предлагаем подсказку
-        # со ссылкой на Яндекс.Маркет.
+
         if len(suggests) < 2:
             suggests.append({
-                "title": "Помощь",
+                "title": "Сайт",
                 "url": "https://www.pythonanywhere.com/user/mionitsa/webapps/#tab_id_mionitsa_pythonanywhere_com",
                 "hide": True
             })
