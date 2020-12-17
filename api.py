@@ -126,8 +126,7 @@ def handle_dialog(req, res):
     if req['request']['original_utterance'].lower() == 'Какая оценка за проект?':
         res['response']['text'] = '5'
         return
-
-
+        
     sred = req['request']['original_utterance'].split()[0].replace(',', '.')
     sred2 = []
     for i in sred:
