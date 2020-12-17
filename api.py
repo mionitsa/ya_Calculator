@@ -123,12 +123,9 @@ def handle_dialog(req, res):
 
         return
 
-    if req['request']['original_utterance'] == '123.':
-        res['response']['text'] = '123'
-        return
 
-    if req['request']['original_utterance'].lower() == 'миша пока.':
-        res['response']['text'] = 'пока'
+    if req['request']['original_utterance'].lower() == 'проверка':
+        res['response']['text'] = 'ок'
         return
 
     sred = req['request']['original_utterance'].split()[0].replace(',', '.')
@@ -144,29 +141,5 @@ def handle_dialog(req, res):
         if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
             marks2.append(i)
     marks = ' '.join(marks2)
-    #хуй
+
     res['response']['text'] = sredball(marks, sred)
-
-    def get_suggests(user_id):
-        session = sessionStorage[user_id]
-
-        # Выбираем две первые подсказки из массива.
-        suggests = [
-            {'title': suggest, 'hide': True}
-            for suggest in session['suggests'][:2]
-        ]
-
-        # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
-        session['suggests'] = session['suggests'][1:]
-        sessionStorage[user_id] = session
-
-        # Если осталась только одна подсказка, предлагаем подсказку
-        # со ссылкой на Яндекс.Маркет.
-        if len(suggests) < 2:
-            suggests.append({
-                "title": "Ладно",
-                "url": "https://market.yandex.ru/search?text=слон",
-                "hide": True
-            })
-
-        return suggests
