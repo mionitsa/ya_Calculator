@@ -108,7 +108,7 @@ def handle_dialog(req, res):
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
                       ' достижения желаемого среднего балла. Сначала скажи средний' \
                       ' балл, который хочешь получить, а потом свои текущие оценки.' \
-                      ' Вот так: 4.6 4545'
+                      ' Вот так: 4.6  4 5 4 5'
         return
     if req['request']['original_utterance'].lower() in [
         'помощь',
@@ -119,17 +119,32 @@ def handle_dialog(req, res):
         res['response']['text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
                                   ' достижения желаемого среднего балла. Сначала скажи средний' \
                                   ' балл, который хочешь получить, а потом свои текущие оценки.' \
-                                  ' Вот так: 4.6 4454'
+                                  ' Вот так: 4.6  4 4 5 4'
 
         return
 
-    sred = req['request']['original_utterance'].split()[0].replace(',', '.')[:-1]
-    marks = [i[0] for i in req['request']['original_utterance'].split()[1:]]
-    b = []
+    if req['request']['original_utterance'] == '123.':
+        res['response']['text'] = '123'
+        return
+
+    if req['request']['original_utterance'].lower() == 'привет.':
+        res['response']['text'] = 'привет'
+        return
+
+    sred = req['request']['original_utterance'].split()[0].replace(',', '.')
+    sred2 = []
+    for i in sred:
+        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+            sred2.append(i)
+    sred = sred2[0] + '.' + ''.join(sred2[1:])
+
+    marks = ''.join(req['request']['original_utterance'].split()[1:])
+    marks2 = []
     for i in marks:
-        if 0 < int(i) <= 5:
-            b.append(i)
+        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+            marks2.append(i)
+    marks = ' '.join(marks2)
 
-    res['response']['text'] = sredball(' '.join(b), sred)
+    res['response']['text'] = sredball(marks, sred)
 
-#я что-то изменил
+#бб
