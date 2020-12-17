@@ -123,12 +123,18 @@ def handle_dialog(req, res):
 
         return
 
-    sred = req['request']['original_utterance'].split()[0].replace(',', '.')[:-1]
-    marks = [i[0] for i in req['request']['original_utterance'].split()[1:]]
-    b = []
-    for i in marks:
-        if 0 < int(i) <= 5:
-            b.append(i)
+    sred = req['request']['original_utterance'].split()[0].replace(',', '.')
+    sred2 = []
+    for i in sred:
+        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+            sred2.append(i)
+    sred = sred2[0] + '.' + ''.join(sred2[1:])
 
-    res['response']['text'] = sredball(' '.join(b), sred)
-  # hello
+    marks = ''.join(req['request']['original_utterance'].split()[1:])
+    marks2 = []
+    for i in marks:
+        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
+            marks2.append(i)
+    marks = ' '.join(marks2)
+
+    res['response']['text'] = sredball(marks, sred)
