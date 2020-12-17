@@ -127,7 +127,7 @@ def handle_dialog(req, res):
         res['response']['text'] = 'привет'
         return
 
-    if req['request']['original_utterance'].lower() == 'пока':
+    if req['request']['original_utterance'].lower() == 'привет':
         res['response']['text'] = 'пока'
         return
 
