@@ -97,17 +97,14 @@ def sredball(marksstr, ballstr):
         return 'Ввод не корректен. '
 
 
-# Функция для непосредственной обработки диалога.
 def handle_dialog(req, res):
     user_id = req['session']['user_id']
 
     if req['session']['new']:
-        # Это новый пользователь.
-        # Инициализируем сессию и поприветствуем его.
 
         sessionStorage[user_id] = {
             'suggests': [
-                "Привет!",
+                "Привет",
                 "Помощь",
                 "Сайт",
             ]
@@ -171,23 +168,10 @@ def handle_dialog(req, res):
 def get_suggests(user_id):
     session = sessionStorage[user_id]
 
-    suggests = [{
-        "title": "Сайт",
-        "url": "mionitsa.pythonanywhere.com",
-        "hide": True
-    }]
-    # Выбираем две первые подсказки из массива.
     suggests = [
         {'title': suggest, 'hide': False}
         for suggest in session['suggests']
     ]
-
-    # Убираем первую подсказку, чтобы подсказки менялись каждый раз.
-    session['suggests'] = session['suggests'][1:]
-    sessionStorage[user_id] = session
-
-    # Если осталась только одна подсказка, предлагаем подсказку
-    # со ссылкой на Яндекс.Маркет
 
 
     return suggests
