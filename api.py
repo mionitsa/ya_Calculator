@@ -31,7 +31,6 @@ def main():
         }
     }
     handle_dialog(request.json, response)
-    handle_dialog2(request.json, response)
 
     logging.info('Response: %r', response)
 
@@ -130,12 +129,3 @@ def handle_dialog(req, res):
         b.append(i)
     res['response']['text'] = sredball(' '.join(b), user_input[0])
     
-def handle_dialog2(req, res):
-    user_id = req['session']['user_id']
-     if req['session']['new']:
-        # Это новый пользователь.
-        # Инициализируем сессию и поприветствуем его.
-        res['response'][
-            'text'] = 'Привет!'
-        return
-
