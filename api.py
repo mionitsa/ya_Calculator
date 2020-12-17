@@ -123,9 +123,11 @@ def handle_dialog(req, res):
 
         return
 
-    user_input = req['request']['original_utterance'].replace(',', '.').split()
-
+    sred = req['request']['original_utterance'].split()[0].replace(',', '.')[:-1]
+    marks = [i for i in req['request']['original_utterance'].split()[1]]
     b = []
-    for i in user_input[1]:
-        b.append(i)
-    res['response']['text'] = sredball(' '.join(b), user_input[0])
+    for i in marks:
+        if 0 < int(i) <= 5:
+            b.append(i)
+
+    res['response']['text'] = sredball(' '.join(b), sred)
