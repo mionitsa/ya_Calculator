@@ -30,7 +30,7 @@ def main():
             "end_session": False
         }
     }
-    handle_dialog(request.json, response)
+
     handle_dialog(request.json, response)
 
     logging.info('Response: %r', response)
@@ -100,14 +100,14 @@ def sredball(marksstr, ballstr):
 # Функция для непосредственной обработки диалога.
 def handle_dialog(req, res):
     user_id = req['session']['user_id']
- 
+
     if req['session']['new']:
         # Это новый пользователь.
         # Инициализируем сессию и поприветствуем его.
         res['response'][
             'text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
-                      ' достижения желаемого среднего балла. Сначала скажи средний'\
-                      ' балл, который хочешь получить, а потом свои текущие оценки.'\
+                      ' достижения желаемого среднего балла. Сначала скажи средний' \
+                      ' балл, который хочешь получить, а потом свои текущие оценки.' \
                       ' Вот так: 4.6 4545'
         return
     if req['request']['original_utterance'].lower() in [
@@ -117,16 +117,15 @@ def handle_dialog(req, res):
         'помоги',
     ]:
         res['response']['text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
-                      ' достижения желаемого среднего балла. Сначала скажи средний'\
-                      ' балл, который хочешь получить, а потом свои текущие оценки.'\
-                      ' Вот так: 4.6 4454'
-                                    
+                                  ' достижения желаемого среднего балла. Сначала скажи средний' \
+                                  ' балл, который хочешь получить, а потом свои текущие оценки.' \
+                                  ' Вот так: 4.6 4454'
+
         return
-    
-    user_input = req['request']['original_utterance'].replace(',','.').split()
-    
+
+    user_input = req['request']['original_utterance'].replace(',', '.').split()
+
     b = []
     for i in user_input[1]:
         b.append(i)
     res['response']['text'] = sredball(' '.join(b), user_input[0])
-    
