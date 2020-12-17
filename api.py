@@ -106,6 +106,7 @@ def handle_dialog(req, res):
             'suggests': [
                 "Привет",
                 "Помощь",
+                "Сайт",
             ]
         }
 
@@ -166,7 +167,7 @@ def handle_dialog(req, res):
 
 def get_suggests(user_id):
     session = sessionStorage[user_id]
-    
+
     suggests = [
         {'title': suggest, 'hide': False}
         for suggest in session['suggests']
