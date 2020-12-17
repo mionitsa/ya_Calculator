@@ -173,7 +173,7 @@ def get_suggests(user_id):
     })
 
     suggests = [
-        {'title': suggest, 'url': 'mionitsa.pythonanywhere.com', 'hide': False}
+        {'title': suggest, 'hide': False}
         for suggest in session['suggests']
     ]
 
