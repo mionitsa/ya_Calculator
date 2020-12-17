@@ -171,6 +171,11 @@ def handle_dialog(req, res):
 def get_suggests(user_id):
     session = sessionStorage[user_id]
 
+    suggests = [{
+        "title": "Сайт",
+        "url": "mionitsa.pythonanywhere.com",
+        "hide": True
+    }]
     # Выбираем две первые подсказки из массива.
     suggests = [
         {'title': suggest, 'hide': False}
@@ -182,11 +187,7 @@ def get_suggests(user_id):
     sessionStorage[user_id] = session
 
     # Если осталась только одна подсказка, предлагаем подсказку
-    # со ссылкой на Яндекс.Маркет.
-        suggests = ({
-            "title": "Сайт",
-            "url": "mionitsa.pythonanywhere.com",
-            "hide": True
-        })
+    # со ссылкой на Яндекс.Маркет
+
 
     return suggests
