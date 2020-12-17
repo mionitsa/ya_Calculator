@@ -146,7 +146,7 @@ def handle_dialog(req, res):
     marks = ' '.join(marks2)
 
     res['response']['text'] = sredball(marks, sred)
-
+#что-то
 #emil12
 #misha
 #lol
