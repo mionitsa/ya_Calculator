@@ -162,6 +162,8 @@ def handle_dialog(req, res):
 
     res['response']['text'] = sredball(marks, sred)
 
+    res['response']['buttons'] = get_suggests(user_id)
+
     def get_suggests(user_id):
         session = sessionStorage[user_id]
 
