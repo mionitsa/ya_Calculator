@@ -144,5 +144,5 @@ def handle_dialog(req, res):
         if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']:
             marks2.append(i)
     marks = ' '.join(marks2)
-
+    #хуй
     res['response']['text'] = sredball(marks, sred)
