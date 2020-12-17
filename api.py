@@ -123,6 +123,10 @@ def handle_dialog(req, res):
 
         return
 
+    if req['request']['original_utterance'].lower() == '123':
+        res['response']['text'] = '123'
+        return
+
     sred = req['request']['original_utterance'].split()[0].replace(',', '.')
     sred2 = []
     for i in sred:
