@@ -107,7 +107,7 @@ def handle_dialog(req, res):
 
         sessionStorage[user_id] = {
             'suggests': [
-                "Привет",
+                "Привет!",
                 "Помощь",
                 "Сайт",
             ]
@@ -128,16 +128,19 @@ def handle_dialog(req, res):
         'что ты умеешь?',
         'помоги',
     ]:
-        res['response']['text'] = 'Привет! Я подскажу тебе, какие оценки ты должен получить для' \
-                                  ' достижения желаемого среднего балла. Сначала скажи средний' \
-                                  ' балл, который хочешь получить, а потом свои текущие оценки.' \
-                                  ' Вот так: 4.6  4 4 5 4'
-
+        res['response']['text'] = 'Я подскажу какие оценки тебе нужно получить, чтобы достичь' \
+                                  'желаемого балла. Просто введи сначала' \
+                                  'балл, который хочешь получить, а потом свои текущие оценки.' \
+                                  'Пример: 4.7 3 4 2 4 5 4'
         return
 
 
     if req['request']['original_utterance'].lower() == 'какая оценка за проект?':
         res['response']['text'] = '5'
+        return
+
+    if req['request']['original_utterance'].lower() == 'сайт':
+        res['response']['text'] = 'Можете перейти по ссылке: mionitsa.pythonanywhere.com '
         return
 
     if req['request']['original_utterance'].lower() == 'привет':
@@ -164,7 +167,6 @@ def handle_dialog(req, res):
 
     res['response']['text'] = sredball(marks, sred)
 
-    res['response']['buttons'] = get_suggests(user_id)
 
 def get_suggests(user_id):
     session = sessionStorage[user_id]
