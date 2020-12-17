@@ -170,5 +170,3 @@ def handle_dialog(req, res):
             })
 
         return suggests
-
-#хуй
