@@ -137,7 +137,7 @@ def handle_dialog(req, res):
         return
 
     if req['request']['original_utterance'].lower() == 'сайт':
-        res['response']['text'] = 'Можете перейти по ссылке: mionitsa.pythonanywhere.com '
+        res['response']['text'] = 'Можете перейти по ссылке: mionitsa.pythonanywhere.com/marks_calculator'
         return
 
     if req['request']['original_utterance'].lower() == 'привет':
